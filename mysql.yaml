@@ -1,0 +1,27 @@
+- hosts: aliyun
+  vars:
+    - mysql_root_password: "root"
+    - mysql_enabled_on_startup: true
+    - mysql_root_password_update: yes
+    - mysql_port: "3306"
+    - mysql_bind_address: "0.0.0.0"
+    - mysql_datadir: /var/lib/mysql
+    - mysql_slow_query_log_enabled: false
+    - mysql_slow_query_time: "2"
+    - mysql_max_binlog_size: "100M"
+    - mysql_binlog_format: "ROW"
+    - mysql_expire_logs_days: "10"
+    - mysql_databases:
+        - name: example
+          collation: utf8mb4_unicode_ci
+          encoding: utf8mb4
+    - mysql_users:
+        - name: example
+          host: "%"
+          password: "helloworld"
+          priv: "example.*:ALL"
+
+  roles:
+    - role: geerlingguy.mysql
+      become: yes
+
